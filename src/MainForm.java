@@ -5,10 +5,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class MainForm extends JFrame {
-    private JFrame mainFrame;
+    public static JFrame mainFrame;
     private JPanel mainPanel;
     private JTabbedPane jTabbedPane;
     private NotePad notePad;
+    private TaskList taskList;
     public static MainForm window;
 
     public MainForm() {
@@ -33,20 +34,21 @@ public class MainForm extends JFrame {
         jTabbedPane = new JTabbedPane();
 
         notePad = new NotePad();
+        taskList = new TaskList();
 
-        jTabbedPane.addTab("World Clock", new JPanel());
-        jTabbedPane.addTab("Calc", new JPanel());
+        //jTabbedPane.addTab("World Clock", new JPanel());
+        //jTabbedPane.addTab("Calc", new JPanel());
         jTabbedPane.addTab("Notepad", notePad);
-        jTabbedPane.addTab("Calendar", new JPanel());
-        jTabbedPane.addTab("Task list", new JPanel());
-        jTabbedPane.addTab("Contacts", new JPanel());
+        //jTabbedPane.addTab("Calendar", new JPanel());
+        jTabbedPane.addTab("Task list", taskList);
+        //jTabbedPane.addTab("Contacts", new JPanel());
 
         final ClockPanel clockPanel = new ClockPanel(new Clock(16, 27));
         clockPanel.setBackground(Color.BLACK);
 
         //gridx,gridy,gridwidth,gridheight,weightx,weighty,anchor,fill,insets,ipadx,ipady
-        mainPanel.add(clockPanel, new GridBagConstraints(0, 0, 1, 1, 0.65, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-        mainPanel.add(jTabbedPane, new GridBagConstraints(1, 0, 1, 1, 0.35, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        mainPanel.add(clockPanel, new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        mainPanel.add(jTabbedPane, new GridBagConstraints(1, 0, 1, 1, 0.4, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
 
         mainFrame.add(mainPanel);
 
@@ -62,7 +64,7 @@ public class MainForm extends JFrame {
     }
 
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
