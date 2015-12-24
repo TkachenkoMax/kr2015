@@ -10,6 +10,7 @@ public class MainForm extends JFrame {
     private JTabbedPane jTabbedPane;
     private NotePad notePad;
     private TaskList taskList;
+    private Calc calc;
     public static MainForm window;
 
     public MainForm() {
@@ -35,9 +36,10 @@ public class MainForm extends JFrame {
 
         notePad = new NotePad();
         taskList = new TaskList();
+        calc = new Calc();
 
         //jTabbedPane.addTab("World Clock", new JPanel());
-        //jTabbedPane.addTab("Calc", new JPanel());
+        jTabbedPane.addTab("Calc", calc);
         jTabbedPane.addTab("Notepad", notePad);
         //jTabbedPane.addTab("Calendar", new JPanel());
         jTabbedPane.addTab("Task list", taskList);
