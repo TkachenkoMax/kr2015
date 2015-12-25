@@ -42,7 +42,7 @@ public class TaskList extends JPanel {
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (newTaskTextField.getText().equals("")){
-                    JOptionPane.showMessageDialog(MainForm.mainFrame, "No text in the field! Write something...");
+                    JOptionPane.showMessageDialog(null, "No text in the field! Write something...");
                 }
                 String element = newTaskTextField.getText();
                 listModel.addElement(element);

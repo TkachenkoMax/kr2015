@@ -7,7 +7,6 @@ public class ClockPanel extends JPanel {
     private Clock clock;
 
     public ClockPanel(Clock сlock) {
-        //setDoubleBuffered(true);
         setPreferredSize(new Dimension(600, 400));
         setClock(сlock);
     }
@@ -23,11 +22,6 @@ public class ClockPanel extends JPanel {
     private void drawCircle(Graphics g, Point center, int radius) {
         g.setColor(Color.WHITE);
         g.fillOval(center.x - radius / 2, center.y - radius / 2, radius, radius);
-    }
-
-    public Point convertCoordinatesToPanel(Point point) {
-        Point O = new Point(getSize().width / 2, getSize().height / 2);
-        return new Point(O.x + point.x, O.y - point.y);
     }
 
     private Point getEndPoint(double angle, int radius) {

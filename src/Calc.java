@@ -33,7 +33,8 @@ public class Calc extends JPanel {
         this.setLayout(layout);
         this.setBackground(Color.BLACK);
 
-        Font font = new Font("Times New Roman", Font.PLAIN, 48);
+        Font buttonsFont = new Font("Times New Roman", Font.PLAIN, 48);
+        Font textFieldFont = new Font("Times New Roman", Font.PLAIN, 20);
 
         calcLabel = new JLabel("Calculator");
         calcLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
@@ -41,6 +42,7 @@ public class Calc extends JPanel {
 
         solution = new JTextField();
         solution.setEditable(false);
+        solution.setFont(textFieldFont);
 
         resetButton = new JButton("Reset");
         backButton = new JButton("<");
@@ -60,23 +62,23 @@ public class Calc extends JPanel {
         resultButton = new JButton("=");
         adding = new JButton("+");
 
-        adding.setFont(font);
-        one.setFont(font);
-        two.setFont(font);
-        three.setFont(font);
-        four.setFont(font);
-        five.setFont(font);
-        six.setFont(font);
-        seven.setFont(font);
-        eight.setFont(font);
-        nine.setFont(font);
-        zero.setFont(font);
-        multiplication.setFont(font);
-        resetButton.setFont(font);
-        backButton.setFont(font);
-        subtracting.setFont(font);
-        division.setFont(font);
-        resultButton.setFont(font);
+        adding.setFont(buttonsFont);
+        one.setFont(buttonsFont);
+        two.setFont(buttonsFont);
+        three.setFont(buttonsFont);
+        four.setFont(buttonsFont);
+        five.setFont(buttonsFont);
+        six.setFont(buttonsFont);
+        seven.setFont(buttonsFont);
+        eight.setFont(buttonsFont);
+        nine.setFont(buttonsFont);
+        zero.setFont(buttonsFont);
+        multiplication.setFont(buttonsFont);
+        resetButton.setFont(buttonsFont);
+        backButton.setFont(buttonsFont);
+        subtracting.setFont(buttonsFont);
+        division.setFont(buttonsFont);
+        resultButton.setFont(buttonsFont);
 
         one.setBackground(Color.BLACK);
         one.setForeground(Color.BLUE);
@@ -256,8 +258,8 @@ public class Calc extends JPanel {
                     solution.setText("0");
                     prevStep = 0;
                 } else {
-                    if (prevStep == 4) {
-                        JOptionPane.showMessageDialog(MainForm.mainFrame, "Эй ты, сучий пес, я тебя на ноль умножу!");
+                    if ((prevStep == 4)&&(solution.getText().equals(""))) {
+                        JOptionPane.showMessageDialog(null, "Эй ты, сучий пес, я тебя на ноль умножу!");
                     } else {
                         String prev = solution.getText();
                         prev += "0";
@@ -325,7 +327,7 @@ public class Calc extends JPanel {
                 if (solution.getText().equals("")) {
                 } else {
                     if (prevStep == 0) {
-                        result -= Integer.valueOf(solution.getText()).intValue();
+                       result += Integer.valueOf(solution.getText()).intValue();
                     } else if (prevStep == 1) {
                         result += Integer.valueOf(solution.getText()).intValue();
                     } else if (prevStep == 2) {

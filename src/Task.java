@@ -1,20 +1,23 @@
 import java.util.Date;
 
-/**
- * Created by Макс on 24.12.2015.
- */
 public class Task {
-    private Date date;
+    private String date;
     private String task;
     private boolean isCompleted;
+    private String id;
 
-    public Task(Date date, String task, boolean isCompleted) {
+    public Task(){
+
+    }
+
+    public Task(String date, String task, boolean isCompleted, String id) {
         this.date = date;
         this.task = task;
         this.isCompleted = isCompleted;
+        this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -22,12 +25,19 @@ public class Task {
         return task;
     }
 
-    public boolean getIsComplited() {
-        return isCompleted;
+    public String getIsComplited() {
+        if (isCompleted)
+            return "completed";
+        else
+            return "not completed";
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = date.toString();
     }
 
     public void setTask(String task) {
