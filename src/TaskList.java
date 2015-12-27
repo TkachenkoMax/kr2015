@@ -6,74 +6,92 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Date;
 
 public class TaskList extends JPanel {
     private JLabel taskListLabel;
-    private JList taskList;
     private JTextField newTaskTextField;
     private JButton addButton;
     private JButton deleteButton;
+    private JButton deleteCompletedButton;
+    private TaskTableView taskTableView;
+    private TaskTableModel taskTableModel;
 
     public TaskList() {
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
         this.setBackground(Color.BLACK);
 
-        final DefaultListModel listModel = new DefaultListModel();
-
         taskListLabel = new JLabel("Task List");
         taskListLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
         taskListLabel.setForeground(Color.WHITE);
-
-        taskList = new JList(listModel);
 
         newTaskTextField = new JTextField();
 
         addButton = new JButton("Add task");
 
+        deleteButton = new JButton("Change completeness");
 
-        deleteButton = new JButton("Task completed");
+        deleteCompletedButton = new JButton("Delete completed tasks");
 
         deleteButton.setBackground(Color.BLACK);
-        deleteButton.setForeground(Color.RED);
+        deleteButton.setForeground(Color.ORANGE);
+        deleteCompletedButton.setBackground(Color.BLACK);
+        deleteCompletedButton.setForeground(Color.RED);
         addButton.setBackground(Color.BLACK);
         addButton.setForeground(Color.GREEN);
 
+        taskTableModel = new TaskTableModel();
+        taskTableView = new TaskTableView(taskTableModel);
+
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (newTaskTextField.getText().equals("")){
+                if (newTaskTextField.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "No text in the field! Write something...");
+                } else {
+                    Date date = new Date();
+                    String dateString = date.toString();
+                    String task = newTaskTextField.getText();
+                    try {
+                        taskTableModel.add(dateString, task, false);
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                    newTaskTextField.setText("");
                 }
-                String element = newTaskTextField.getText();
-                listModel.addElement(element);
-                int index = listModel.size() - 1;
-                taskList.setSelectedIndex(index);
-                taskList.ensureIndexIsVisible(index);
-                newTaskTextField.setText("");
             }
         });
 
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                listModel.remove(taskList.getSelectedIndex());
-            }
-        });
-
-        taskList.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                if (taskList.getSelectedIndex() >= 0) {
-                    deleteButton.setEnabled(true);
-                } else {
-                    deleteButton.setEnabled(false);
+                int pos = taskTableView.getSelectedRow();
+                if (pos > -1) {
+                    try {
+                        taskTableModel.delete(pos);
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             }
         });
 
-        //gridx,gridy,gridwidth,gridheight,weightx,weighty,anchor,fill,insets,ipadx,ipady
+        deleteCompletedButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    taskTableModel.deleteCompleted();
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
         this.add(taskListLabel, new GridBagConstraints(0, 0, GridBagConstraints.REMAINDER, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-        this.add(taskList, new GridBagConstraints(0, 1, GridBagConstraints.REMAINDER, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(taskTableView, new GridBagConstraints(0, 1, GridBagConstraints.REMAINDER, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
         this.add(deleteButton, new GridBagConstraints(0, 2, GridBagConstraints.REMAINDER, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-        this.add(newTaskTextField, new GridBagConstraints(0, 3, 2, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-        this.add(addButton, new GridBagConstraints(3, 3, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(deleteCompletedButton, new GridBagConstraints(0, 3, GridBagConstraints.REMAINDER, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(newTaskTextField, new GridBagConstraints(0, 4, 2, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(addButton, new GridBagConstraints(3, 4, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
     }
 }

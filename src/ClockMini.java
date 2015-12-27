@@ -48,7 +48,7 @@ public class ClockMini extends JPanel {
             int sec = currentTime.get(Calendar.SECOND);
 
             int year = currentTime.get(Calendar.YEAR);
-            int month = currentTime.get(Calendar.MONTH);
+            int month = currentTime.get(Calendar.MONTH)+1;
             int day = currentTime.get(Calendar.DAY_OF_MONTH);
 
             dateField.setText("Today: " + day + "." + month + "." + year);

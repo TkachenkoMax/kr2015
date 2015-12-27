@@ -6,10 +6,6 @@ public class Task {
     private boolean isCompleted;
     private String id;
 
-    public Task(){
-
-    }
-
     public Task(String date, String task, boolean isCompleted, String id) {
         this.date = date;
         this.task = task;
@@ -50,5 +46,9 @@ public class Task {
 
     public String toString() {
         return date + " " + task;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

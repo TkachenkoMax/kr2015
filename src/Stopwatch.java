@@ -156,4 +156,4 @@ public class Stopwatch extends JPanel {
             setSec(sec);
         }
     }
-} 
+}

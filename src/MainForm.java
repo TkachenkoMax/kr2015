@@ -43,12 +43,31 @@ public class MainForm extends JFrame {
         stopwatch = new Stopwatch();
         myTimer = new MyTimer();
 
-        jTabbedPane.addTab("Timer", myTimer);
+        JPanel timerAndStopwatch = new JPanel();
+        timerAndStopwatch.setLayout(layout);
+        timerAndStopwatch.setBackground(Color.BLACK);
+
+        JLabel stopwatchLabel = new JLabel("Stopwatch");
+        stopwatchLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        stopwatchLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+        stopwatchLabel.setBackground(Color.BLACK);
+        stopwatchLabel.setForeground(Color.WHITE);
+
+        JLabel timerLabel = new JLabel("Timer");
+        timerLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+        timerLabel.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+        timerLabel.setBackground(Color.BLACK);
+        timerLabel.setForeground(Color.WHITE);
+
+        timerAndStopwatch.add(stopwatchLabel, new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        timerAndStopwatch.add(stopwatch, new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        timerAndStopwatch.add(timerLabel, new GridBagConstraints(0, 2, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        timerAndStopwatch.add(myTimer, new GridBagConstraints(0, 3, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+
+        jTabbedPane.addTab("Timer and Stopwatch", timerAndStopwatch);
         jTabbedPane.addTab("Calc", calc);
         jTabbedPane.addTab("Notepad", notePad);
-        //jTabbedPane.addTab("Calendar", new JPanel());
         jTabbedPane.addTab("Task list", taskList);
-        jTabbedPane.addTab("Stopwatch", stopwatch);
 
         final ClockPanel clockPanel = new ClockPanel(new Clock(16, 27));
         clockPanel.setBackground(Color.BLACK);
@@ -62,6 +81,9 @@ public class MainForm extends JFrame {
 
         mainFrame.add(mainPanel);
         mainFrame.setVisible(true);
+
+        mainFrame.pack();
+        mainFrame.setResizable(false);
 
         Timer timer = new Timer(1000, new ActionListener() {
 

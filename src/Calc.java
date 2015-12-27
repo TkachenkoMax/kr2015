@@ -1,5 +1,3 @@
-import javafx.beans.property.adapter.JavaBeanBooleanProperty;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -282,7 +280,7 @@ public class Calc extends JPanel {
                         prevStep = 0;
                         tf = false;
                     } else {
-                        result = Integer.valueOf(solution.getText()).intValue();
+                        result = Double.valueOf(solution.getText()).doubleValue();
                     }
                 }
             }
@@ -304,15 +302,15 @@ public class Calc extends JPanel {
                 if (solution.getText().equals("")) {
                 } else {
                     if (prevStep == 0) {
-                        result += Integer.valueOf(solution.getText()).intValue();
+                        result += Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 1) {
-                        result += Integer.valueOf(solution.getText()).intValue();
+                        result += Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 2) {
-                        result -= Integer.valueOf(solution.getText()).intValue();
+                        result -= Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 3) {
-                        result *= Integer.valueOf(solution.getText()).intValue();
+                        result *= Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 4) {
-                        result /= Integer.valueOf(solution.getText()).intValue();
+                        result /= Double.valueOf(solution.getText()).doubleValue();
                     }
                     solution.setText("");
                     prevStep = 1;
@@ -327,15 +325,15 @@ public class Calc extends JPanel {
                 if (solution.getText().equals("")) {
                 } else {
                     if (prevStep == 0) {
-                       result += Integer.valueOf(solution.getText()).intValue();
+                       result += Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 1) {
-                        result += Integer.valueOf(solution.getText()).intValue();
+                        result += Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 2) {
-                        result -= Integer.valueOf(solution.getText()).intValue();
+                        result -= Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 3) {
-                        result *= Integer.valueOf(solution.getText()).intValue();
+                        result *= Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 4) {
-                        result /= Integer.valueOf(solution.getText()).intValue();
+                        result /= Double.valueOf(solution.getText()).doubleValue();
                     }
                     solution.setText("");
                     prevStep = 2;
@@ -350,15 +348,15 @@ public class Calc extends JPanel {
                 if (solution.getText().equals("")) {
                 } else {
                     if (prevStep == 0) {
-                        result += Integer.valueOf(solution.getText()).intValue();
+                        result += Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 1) {
-                        result += Integer.valueOf(solution.getText()).intValue();
+                        result += Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 2) {
-                        result -= Integer.valueOf(solution.getText()).intValue();
+                        result -= Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 3) {
-                        result *= Integer.valueOf(solution.getText()).intValue();
+                        result *= Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 4) {
-                        result /= Integer.valueOf(solution.getText()).intValue();
+                        result /= Double.valueOf(solution.getText()).doubleValue();
                     }
                     solution.setText("");
                     prevStep = 3;
@@ -373,15 +371,15 @@ public class Calc extends JPanel {
                 if (solution.getText().equals("")) {
                 } else {
                     if (prevStep == 0) {
-                        result += Integer.valueOf(solution.getText()).intValue();
+                        result += Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 1) {
-                        result += Integer.valueOf(solution.getText()).intValue();
+                        result += Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 2) {
-                        result -= Integer.valueOf(solution.getText()).intValue();
+                        result -= Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 3) {
-                        result *= Integer.valueOf(solution.getText()).intValue();
+                        result *= Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 4) {
-                        result /= Integer.valueOf(solution.getText()).intValue();
+                        result /= Double.valueOf(solution.getText()).doubleValue();
                     }
                     solution.setText("");
                     prevStep = 4;
@@ -396,13 +394,13 @@ public class Calc extends JPanel {
                 if ((solution.getText().equals("")) || (tf == false)) {
                 } else {
                     if (prevStep == 1) {
-                        result += Integer.valueOf(solution.getText()).intValue();
+                        result += Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 2) {
-                        result -= Integer.valueOf(solution.getText()).intValue();
+                        result -= Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 3) {
-                        result *= Integer.valueOf(solution.getText()).intValue();
+                        result *= Double.valueOf(solution.getText()).doubleValue();
                     } else if (prevStep == 4) {
-                        result /= Integer.valueOf(solution.getText()).intValue();
+                        result /= Double.valueOf(solution.getText()).doubleValue();
                     }
                     solution.setText(Double.toString(result));
                     prevStep = 5;
