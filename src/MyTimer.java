@@ -39,7 +39,6 @@ public class MyTimer extends JPanel {
             y--;
             masHours[y] = Integer.toString(i);
         }
-        hoursComboBox = new JComboBox(masHours);
 
         String masMins[] = new String[60];
         for (int y = 0; y < 60; y++) {
@@ -98,6 +97,7 @@ public class MyTimer extends JPanel {
         startButton.setForeground(new Color(0xFF6504));
         stopButton.setForeground(new Color(0xFF6504));
         resetButton.setForeground(new Color(0xFF6504));
+        stopButton.setEnabled(false);
 
         this.add(hourLabelInfo, new GridBagConstraints(0, 0, 2, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
         this.add(minLabelInfo, new GridBagConstraints(2, 0, 2, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
@@ -124,11 +124,12 @@ public class MyTimer extends JPanel {
                     sec = Integer.parseInt(object.toString());
                 }
                 if ((sec == 0) && (hour == 0) && (min == 0)) {
-                    JOptionPane.showMessageDialog(null, "Задайте время!");
+                    JOptionPane.showMessageDialog(null, "Set time!");
                 } else {
                     hourLabel.setText(Integer.toString(hour));
                     minLabel.setText(Integer.toString(min));
                     secLabel.setText(Integer.toString(sec));
+                    stopButton.setEnabled(true);
                     t.start();
                 }
             }
@@ -140,6 +141,7 @@ public class MyTimer extends JPanel {
                 if ((isInWork) && (sec == 0) && (hour == 0) && (min == 0)) {
                 } else {
                     t.stop();
+                    stopButton.setEnabled(false);
                     isInWork = true;
                 }
             }
@@ -165,7 +167,8 @@ public class MyTimer extends JPanel {
         isInWork = false;
         secLabel.setText("0");
         sec = 0;
-        JOptionPane.showMessageDialog(null, "Время истекло!");
+        stopButton.setEnabled(false);
+        JOptionPane.showMessageDialog(null, "Time is up!");
     }
 
     public int getHour() {

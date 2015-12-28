@@ -104,7 +104,7 @@ public class TaskTableView extends JPanel {
                 case 2:
                     return tab_model.getTask(row);
                 case 3:
-                    return tab_model.getComleteness(row);
+                    return tab_model.getCompleteness(row);
             }
             assert (false);
             return null;

@@ -257,7 +257,7 @@ public class Calc extends JPanel {
                     prevStep = 0;
                 } else {
                     if ((prevStep == 4)&&(solution.getText().equals(""))) {
-                        JOptionPane.showMessageDialog(null, "Эй ты, сучий пес, я тебя на ноль умножу!");
+                        JOptionPane.showMessageDialog(null, "Division by zero!");
                     } else {
                         String prev = solution.getText();
                         prev += "0";

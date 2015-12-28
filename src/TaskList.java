@@ -15,6 +15,9 @@ public class TaskList extends JPanel {
     private JButton addButton;
     private JButton deleteButton;
     private JButton deleteCompletedButton;
+    private JCheckBox completedCheckBox;
+    private JCheckBox notCompletedCheckBox;
+    private JButton refreshButton;
     private TaskTableView taskTableView;
     private TaskTableModel taskTableModel;
 
@@ -30,8 +33,8 @@ public class TaskList extends JPanel {
         newTaskTextField = new JTextField();
 
         addButton = new JButton("Add task");
-
         deleteButton = new JButton("Change completeness");
+        refreshButton = new JButton("Refresh");
 
         deleteCompletedButton = new JButton("Delete completed tasks");
 
@@ -41,9 +44,21 @@ public class TaskList extends JPanel {
         deleteCompletedButton.setForeground(Color.RED);
         addButton.setBackground(Color.BLACK);
         addButton.setForeground(Color.GREEN);
+        refreshButton.setBackground(Color.BLACK);
+        refreshButton.setForeground(Color.GREEN);
+
+        completedCheckBox = new JCheckBox("Show completed tasks");
+        notCompletedCheckBox = new JCheckBox("Show not completed tasks");
+        completedCheckBox.setBackground(Color.BLACK);
+        completedCheckBox.setForeground(Color.WHITE);
+        notCompletedCheckBox.setBackground(Color.BLACK);
+        notCompletedCheckBox.setForeground(Color.WHITE);
+        notCompletedCheckBox.setSelected(true);
 
         taskTableModel = new TaskTableModel();
         taskTableView = new TaskTableView(taskTableModel);
+
+        taskTableModel.refresh(2);
 
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -87,11 +102,34 @@ public class TaskList extends JPanel {
             }
         });
 
+        refreshButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int count=0;
+                if((completedCheckBox.isSelected())&&(notCompletedCheckBox.isSelected())){
+                    count=3;
+                }
+                if((!completedCheckBox.isSelected())&&(notCompletedCheckBox.isSelected())){
+                    count=2;
+                }
+                if((completedCheckBox.isSelected())&&(!notCompletedCheckBox.isSelected())){
+                    count=1;
+                }
+                if((!completedCheckBox.isSelected())&&(!notCompletedCheckBox.isSelected())){
+                    count=0;
+                }
+                taskTableModel.refresh(count);
+            }
+        });
+
         this.add(taskListLabel, new GridBagConstraints(0, 0, GridBagConstraints.REMAINDER, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
         this.add(taskTableView, new GridBagConstraints(0, 1, GridBagConstraints.REMAINDER, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-        this.add(deleteButton, new GridBagConstraints(0, 2, GridBagConstraints.REMAINDER, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-        this.add(deleteCompletedButton, new GridBagConstraints(0, 3, GridBagConstraints.REMAINDER, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-        this.add(newTaskTextField, new GridBagConstraints(0, 4, 2, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-        this.add(addButton, new GridBagConstraints(3, 4, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(completedCheckBox, new GridBagConstraints(0, 2, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(notCompletedCheckBox, new GridBagConstraints(1, 2, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(refreshButton, new GridBagConstraints(2, 2, GridBagConstraints.REMAINDER, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(deleteButton, new GridBagConstraints(0, 3, GridBagConstraints.REMAINDER, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(deleteCompletedButton, new GridBagConstraints(0, 4, GridBagConstraints.REMAINDER, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(newTaskTextField, new GridBagConstraints(0, 5, 2, 1, 1, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(addButton, new GridBagConstraints(3, 5, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
     }
 }

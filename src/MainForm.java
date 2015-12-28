@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.io.File;
 
 public class MainForm extends JFrame {
     private JFrame mainFrame;
@@ -19,6 +19,13 @@ public class MainForm extends JFrame {
     public MainForm() {
         mainFrame = new JFrame();
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        File myPath = new File("tasks");
+        myPath.mkdir();
+        myPath.mkdirs();
+        myPath = new File("notes");
+        myPath.mkdir();
+        myPath.mkdirs();
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -76,8 +83,6 @@ public class MainForm extends JFrame {
         mainPanel.add(clockPanel, new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
         mainPanel.add(clockMini, new GridBagConstraints(0, 1, 1, 1, 1, 0.1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
         mainPanel.add(jTabbedPane, new GridBagConstraints(1, 0, 1, 2, 0.4, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
-
-        JOptionPane.showMessageDialog(mainFrame, "Помните, любой баг - ЭТО ФИЧА!");
 
         mainFrame.add(mainPanel);
         mainFrame.setVisible(true);

@@ -40,7 +40,7 @@ public class Task {
         this.task = task;
     }
 
-    public void changeComleteness() {
+    public void changeCompleteness() {
         isCompleted = !isCompleted;
     }
 
